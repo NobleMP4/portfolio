@@ -58,6 +58,25 @@ if ($action === 'view' && $message_id) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Administration - Messages</title>
+    
+    <!-- Favicon adaptatif au thème -->
+    <link rel="icon" href="../assets/logo/logo-clair.png" media="(prefers-color-scheme: light)">
+    <link rel="icon" href="../assets/logo/logo-sombre.png" media="(prefers-color-scheme: dark)">
+    <link rel="icon" href="../assets/logo/logo-clair.png"> <!-- Fallback -->
+    
+    
+    <!-- PWA Meta Tags -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#58a6ff">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Portfolio Admin">
+    <link rel="apple-touch-icon" href="../assets/logo/logo-clair.png">
+    <link rel="apple-touch-startup-image" href="../assets/logo/logo-clair.png">
+    <meta name="msapplication-TileColor" content="#0d1117">
+    <meta name="msapplication-TileImage" content="../assets/logo/logo-clair.png">
+    <meta name="application-name" content="Portfolio Admin">
+    
     <link rel="stylesheet" href="../assets/css/admin.css">
     <link rel="stylesheet" href="../assets/css/style.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
@@ -212,5 +231,8 @@ if ($action === 'view' && $message_id) {
             </div>
         </main>
     </div>
+
+    <!-- PWA Installation Script -->
+    <script src="pwa-install.js"></script>
 </body>
 </html>

@@ -12,6 +12,12 @@ $recentProjects = getRecentProjects($pdo, 4);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dev Portfolio - Code & Créativité</title>
+    
+    <!-- Favicon adaptatif au thème -->
+    <link rel="icon" href="assets/logo/logo-clair.png" media="(prefers-color-scheme: light)">
+    <link rel="icon" href="assets/logo/logo-sombre.png" media="(prefers-color-scheme: dark)">
+    <link rel="icon" href="assets/logo/logo-clair.png"> <!-- Fallback -->
+    
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/style.css">

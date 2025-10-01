@@ -17,7 +17,7 @@ define('SMTP_HOST', 'smtp.hostinger.com');
 define('SMTP_PORT', 465);
 define('SMTP_USERNAME', 'contact@edperso.fr');
 define('SMTP_PASSWORD', 'Pipefeu2.');
-define('SMTP_ENCRYPTION', 'SSL');
+define('SMTP_ENCRYPTION', 'ssl');
 
 /**
  * Instructions de configuration :

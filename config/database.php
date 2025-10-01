@@ -15,9 +15,9 @@ if ($_SERVER['SERVER_NAME'] == 'localhost' || $_SERVER['SERVER_NAME'] == '127.0.
     // Configuration pour serveur de production
     $host = 'localhost';
     $port = '3306';
-    $dbname = 'portfolio';
-    $username = 'your_username';
-    $password = 'your_password';
+    $dbname = 'u848917271_edperso';
+    $username = 'u848917271_portfolio';
+    $password = 'Pipefeu2.';
 }
 
 try {

@@ -1,7 +1,6 @@
 <?php
 session_start();
 require_once 'config/database.php';
-require_once 'config/email.php';
 require_once 'includes/functions.php';
 
 $success_message = '';
@@ -44,26 +43,32 @@ if ($_POST && isset($_POST['submit_contact'])) {
                 $stmt = $pdo->prepare($sql);
                 $stmt->execute([$name, $email, $subject, $message]);
                 
-                // Envoyer l'email de notification
-                $email_subject = "[" . SITE_NAME . "] Nouveau message de contact : " . $subject;
+                // Envoyer un email (optionnel)
+                $email_subject = "Nouveau message de contact : " . $subject;
+                $email_message = "
+                <html>
+                <head><title>Nouveau message de contact</title></head>
+                <body>
+                    <h2>Nouveau message de contact</h2>
+                    <p><strong>Nom :</strong> $name</p>
+                    <p><strong>Email :</strong> $email</p>
+                    <p><strong>Sujet :</strong> $subject</p>
+                    <p><strong>Message :</strong></p>
+                    <p>" . nl2br($message) . "</p>
+                </body>
+                </html>
+                ";
                 
-                $email_sent = sendContactEmail(ADMIN_EMAIL, $email_subject, $message, $name, $email);
+                // Remplacez par votre email
+                sendEmail('votre-email@domain.com', $email_subject, $email_message, $name, $email);
                 
-                if ($email_sent) {
-                    $success_message = 'Votre message a été envoyé avec succès ! Je vous répondrai dans les plus brefs délais.';
-                } else {
-                    $success_message = 'Votre message a été enregistré. Je vous répondrai dans les plus brefs délais.';
-                    // Log l'erreur d'envoi d'email (optionnel)
-                    error_log("Erreur d'envoi d'email de contact pour : " . $email);
-                }
+                $success_message = 'Votre message a été envoyé avec succès ! Je vous répondrai dans les plus brefs délais.';
                 
                 // Réinitialiser les champs
                 $name = $email = $subject = $message = '';
                 
             } catch (Exception $e) {
                 $error_message = 'Une erreur est survenue lors de l\'envoi du message. Veuillez réessayer.';
-                // Log l'erreur (optionnel)
-                error_log("Erreur formulaire de contact : " . $e->getMessage());
             }
         } else {
             $error_message = implode('<br>', $errors);
@@ -80,6 +85,12 @@ $csrf_token = generate_csrf_token();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contact - Portfolio</title>
+    
+    <!-- Favicon adaptatif au thème -->
+    <link rel="icon" href="assets/logo/logo-clair.png" media="(prefers-color-scheme: light)">
+    <link rel="icon" href="assets/logo/logo-sombre.png" media="(prefers-color-scheme: dark)">
+    <link rel="icon" href="assets/logo/logo-clair.png"> <!-- Fallback -->
+    
     <link rel="stylesheet" href="assets/css/style.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 </head>
@@ -134,7 +145,7 @@ $csrf_token = generate_csrf_token();
                             </div>
                             <div>
                                 <div style="font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 0.25rem;">Email</div>
-                                <div style="color: var(--text-primary); font-family: 'JetBrains Mono', monospace; font-size: 0.9rem;">votre-email@domain.com</div>
+                                <div style="color: var(--text-primary); font-family: 'JetBrains Mono', monospace; font-size: 0.9rem;">derenneesteban@gmail.com</div>
                             </div>
                         </div>
                         
@@ -144,7 +155,7 @@ $csrf_token = generate_csrf_token();
                             </div>
                             <div>
                                 <div style="font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 0.25rem;">Téléphone</div>
-                                <div style="color: var(--text-primary); font-family: 'JetBrains Mono', monospace; font-size: 0.9rem;">+33 1 23 45 67 89</div>
+                                <div style="color: var(--text-primary); font-family: 'JetBrains Mono', monospace; font-size: 0.9rem;">07 57 87 60 74</div>
                             </div>
                         </div>
                         
@@ -154,7 +165,7 @@ $csrf_token = generate_csrf_token();
                             </div>
                             <div>
                                 <div style="font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 0.25rem;">Localisation</div>
-                                <div style="color: var(--text-primary); font-family: 'JetBrains Mono', monospace; font-size: 0.9rem;">Paris, France</div>
+                                <div style="color: var(--text-primary); font-family: 'JetBrains Mono', monospace; font-size: 0.9rem;">Chartres, France</div>
                             </div>
                         </div>
                         
@@ -174,14 +185,11 @@ $csrf_token = generate_csrf_token();
                             <span style="color: var(--text-muted);">// </span>Réseaux Sociaux
                         </h3>
                         <div style="display: flex; gap: 1rem;">
-                            <a href="#" style="width: 40px; height: 40px; background: var(--bg-primary); border: 1px solid var(--border); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: var(--text-secondary); text-decoration: none; transition: all 0.3s ease;" onmouseover="this.style.borderColor='var(--accent-blue)'; this.style.color='var(--accent-blue)'" onmouseout="this.style.borderColor='var(--border)'; this.style.color='var(--text-secondary)'">
+                            <a href="https://www.linkedin.com/in/esteban-derenne-328961271/" style="width: 40px; height: 40px; background: var(--bg-primary); border: 1px solid var(--border); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: var(--text-secondary); text-decoration: none; transition: all 0.3s ease;" onmouseover="this.style.borderColor='var(--accent-blue)'; this.style.color='var(--accent-blue)'" onmouseout="this.style.borderColor='var(--border)'; this.style.color='var(--text-secondary)'">
                                 <i class="fab fa-linkedin"></i>
                             </a>
-                            <a href="#" style="width: 40px; height: 40px; background: var(--bg-primary); border: 1px solid var(--border); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: var(--text-secondary); text-decoration: none; transition: all 0.3s ease;" onmouseover="this.style.borderColor='var(--accent-blue)'; this.style.color='var(--accent-blue)'" onmouseout="this.style.borderColor='var(--border)'; this.style.color='var(--text-secondary)'">
+                            <a href="https://github.com/NobleMP4" style="width: 40px; height: 40px; background: var(--bg-primary); border: 1px solid var(--border); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: var(--text-secondary); text-decoration: none; transition: all 0.3s ease;" onmouseover="this.style.borderColor='var(--accent-blue)'; this.style.color='var(--accent-blue)'" onmouseout="this.style.borderColor='var(--border)'; this.style.color='var(--text-secondary)'">
                                 <i class="fab fa-github"></i>
-                            </a>
-                            <a href="#" style="width: 40px; height: 40px; background: var(--bg-primary); border: 1px solid var(--border); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: var(--text-secondary); text-decoration: none; transition: all 0.3s ease;" onmouseover="this.style.borderColor='var(--accent-blue)'; this.style.color='var(--accent-blue)'" onmouseout="this.style.borderColor='var(--border)'; this.style.color='var(--text-secondary)'">
-                                <i class="fab fa-twitter"></i>
                             </a>
                         </div>
                     </div>

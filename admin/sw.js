@@ -1,5 +1,5 @@
 // Service Worker pour Portfolio Admin PWA
-const CACHE_NAME = 'portfolio-admin-v1.2';
+const CACHE_NAME = 'portfolio-admin-v1.4';
 const CACHE_URLS = [
   '/admin/',
   '/admin/index.php',
@@ -15,6 +15,7 @@ const CACHE_URLS = [
   '/assets/css/style.css',
   '/assets/logo/logo-clair.png',
   '/assets/logo/logo-sombre.png',
+  '/admin/favicon-theme.js',
   'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css'
 ];
 

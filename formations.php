@@ -9,12 +9,31 @@ $formations = getFormations($pdo);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Formations - Portfolio</title>
+    <title>Esteban DERENNE</title>
     
-    <!-- Favicon adaptatif au thème -->
-    <link rel="icon" href="assets/logo/logo-clair.png" media="(prefers-color-scheme: light)">
-    <link rel="icon" href="assets/logo/logo-sombre.png" media="(prefers-color-scheme: dark)">
-    <link rel="icon" href="assets/logo/logo-clair.png"> <!-- Fallback -->
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Formations d'Esteban DERENNE - Développeur Full Stack. Découvrez mon parcours éducatif, mes diplômes et ma formation en développement web et technologies.">
+    <meta name="keywords" content="Esteban DERENNE, formations, diplômes, parcours éducatif, développeur, full stack, études, formation web, technologies">
+    <meta name="author" content="Esteban DERENNE">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Formations d'Esteban DERENNE - Parcours Éducatif">
+    <meta property="og:description" content="Découvrez le parcours éducatif d'Esteban DERENNE, développeur Full Stack avec une formation solide en développement web.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://esteban-derenne.fr/formations">
+    <meta property="og:image" content="https://esteban-derenne.fr/assets/img/photo-portfolio.png">
+    <meta property="og:site_name" content="Esteban DERENNE Portfolio">
+    <meta property="og:locale" content="fr_FR">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Formations d'Esteban DERENNE - Parcours Éducatif">
+    <meta name="twitter:description" content="Découvrez le parcours éducatif d'Esteban DERENNE, développeur Full Stack.">
+    <meta name="twitter:image" content="https://esteban-derenne.fr/assets/img/photo-portfolio.png">
+    
+    <!-- Favicon dynamique -->
+    <link rel="icon" type="image/png" href="assets/logo/logo-sombre.png?v=5">
     
     <link rel="stylesheet" href="assets/css/style.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
@@ -112,5 +131,6 @@ $formations = getFormations($pdo);
     </div>
 
     <script src="assets/js/main.js"></script>
+    <script src="assets/js/favicon-theme.js"></script>
 </body>
 </html>

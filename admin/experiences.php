@@ -13,14 +13,14 @@ $error_message = '';
 // Traitement des actions
 if ($_POST) {
     if (isset($_POST['add_experience'])) {
-        $title = sanitize_input($_POST['title']);
-        $company = sanitize_input($_POST['company']);
-        $location = sanitize_input($_POST['location']);
+        $title = clean_for_database($_POST['title']);
+        $company = clean_for_database($_POST['company']);
+        $location = clean_for_database($_POST['location']);
         $start_date = $_POST['start_date'];
         $end_date = $_POST['end_date'] ?: null;
         $current_position = isset($_POST['current_position']) ? 1 : 0;
-        $description = sanitize_input($_POST['description']);
-        $technologies = sanitize_input($_POST['technologies']);
+        $description = clean_for_database($_POST['description']);
+        $technologies = clean_for_database($_POST['technologies']);
         $logo = '';
         $sort_order = (int)$_POST['sort_order'];
         
@@ -46,14 +46,14 @@ if ($_POST) {
     }
     
     if (isset($_POST['edit_experience'])) {
-        $title = sanitize_input($_POST['title']);
-        $company = sanitize_input($_POST['company']);
-        $location = sanitize_input($_POST['location']);
+        $title = clean_for_database($_POST['title']);
+        $company = clean_for_database($_POST['company']);
+        $location = clean_for_database($_POST['location']);
         $start_date = $_POST['start_date'];
         $end_date = $_POST['end_date'] ?: null;
         $current_position = isset($_POST['current_position']) ? 1 : 0;
-        $description = sanitize_input($_POST['description']);
-        $technologies = sanitize_input($_POST['technologies']);
+        $description = clean_for_database($_POST['description']);
+        $technologies = clean_for_database($_POST['technologies']);
         $logo = '';
         $sort_order = (int)$_POST['sort_order'];
         
@@ -121,12 +121,10 @@ if ($action === 'list') {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Administration - Expériences</title>
+    <title>Esteban DERENNE - Administration</title>
     
-    <!-- Favicon adaptatif au thème -->
-    <link rel="icon" href="../assets/logo/logo-clair.png" media="(prefers-color-scheme: light)">
-    <link rel="icon" href="../assets/logo/logo-sombre.png" media="(prefers-color-scheme: dark)">
-    <link rel="icon" href="../assets/logo/logo-clair.png"> <!-- Fallback -->
+    <!-- Favicon dynamique -->
+    <link rel="icon" type="image/png" href="../assets/logo/logo-sombre.png?v=5">
     
     
     <!-- PWA Meta Tags -->
@@ -384,5 +382,6 @@ if ($action === 'list') {
     
     <!-- Admin JavaScript -->
     <script src="../assets/js/admin.js"></script>
+    <script src="favicon-theme.js"></script>
 </body>
 </html>

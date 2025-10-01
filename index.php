@@ -11,12 +11,31 @@ $recentProjects = getRecentProjects($pdo, 4);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dev Portfolio - Code & Créativité</title>
+    <title>Esteban DERENNE</title>
     
-    <!-- Favicon adaptatif au thème -->
-    <link rel="icon" href="assets/logo/logo-clair.png" media="(prefers-color-scheme: light)">
-    <link rel="icon" href="assets/logo/logo-sombre.png" media="(prefers-color-scheme: dark)">
-    <link rel="icon" href="assets/logo/logo-clair.png"> <!-- Fallback -->
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Esteban DERENNE - Développeur Full Stack passionné. Portfolio professionnel présentant mes projets, compétences techniques et expériences en développement web.">
+    <meta name="keywords" content="Esteban DERENNE, développeur, full stack, portfolio, web development, PHP, JavaScript, React, Node.js, développeur web">
+    <meta name="author" content="Esteban DERENNE">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Esteban DERENNE - Développeur Full Stack">
+    <meta property="og:description" content="Portfolio professionnel d'Esteban DERENNE, développeur Full Stack passionné par le développement web et les nouvelles technologies.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://esteban-derenne.fr">
+    <meta property="og:image" content="https://esteban-derenne.fr/assets/img/photo-portfolio.png">
+    <meta property="og:site_name" content="Esteban DERENNE Portfolio">
+    <meta property="og:locale" content="fr_FR">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Esteban DERENNE - Développeur Full Stack">
+    <meta name="twitter:description" content="Portfolio professionnel d'Esteban DERENNE, développeur Full Stack passionné par le développement web.">
+    <meta name="twitter:image" content="https://esteban-derenne.fr/assets/img/photo-portfolio.png">
+    
+    <!-- Favicon dynamique -->
+    <link rel="icon" type="image/png" href="assets/logo/logo-sombre.png?v=5">
     
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
@@ -89,5 +108,6 @@ $recentProjects = getRecentProjects($pdo, 4);
     </div>
 
     <script src="assets/js/main.js"></script>
+    <script src="assets/js/favicon-theme.js"></script>
 </body>
 </html>

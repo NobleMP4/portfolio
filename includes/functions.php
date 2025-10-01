@@ -4,12 +4,22 @@
  */
 
 /**
- * Sécuriser les données d'entrée
+ * Sécuriser les données d'entrée pour l'affichage
  */
 function sanitize_input($data) {
     $data = trim($data);
     $data = stripslashes($data);
-    $data = htmlspecialchars($data);
+    $data = htmlspecialchars($data, ENT_QUOTES | ENT_HTML5, 'UTF-8', false);
+    return $data;
+}
+
+/**
+ * Nettoyer les données pour la base de données (sans échappement HTML)
+ */
+function clean_for_database($data) {
+    $data = trim($data);
+    $data = stripslashes($data);
+    // Ne pas échapper les apostrophes pour la base de données
     return $data;
 }
 

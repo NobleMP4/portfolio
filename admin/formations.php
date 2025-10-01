@@ -13,14 +13,14 @@ $error_message = '';
 // Traitement des actions
 if ($_POST) {
     if (isset($_POST['add_formation'])) {
-        $title = sanitize_input($_POST['title']);
-        $school = sanitize_input($_POST['school']);
-        $location = sanitize_input($_POST['location']);
-        $diploma = sanitize_input($_POST['diploma']);
+        $title = clean_for_database($_POST['title']);
+        $school = clean_for_database($_POST['school']);
+        $location = clean_for_database($_POST['location']);
+        $diploma = clean_for_database($_POST['diploma']);
         $start_date = $_POST['start_date'];
         $end_date = $_POST['end_date'] ?: null;
         $current_formation = isset($_POST['current_formation']) ? 1 : 0;
-        $description = sanitize_input($_POST['description']);
+        $description = clean_for_database($_POST['description']);
         $sort_order = (int)$_POST['sort_order'];
         
         // Gestion du logo
@@ -47,14 +47,14 @@ if ($_POST) {
     }
     
     if (isset($_POST['edit_formation'])) {
-        $title = sanitize_input($_POST['title']);
-        $school = sanitize_input($_POST['school']);
-        $location = sanitize_input($_POST['location']);
-        $diploma = sanitize_input($_POST['diploma']);
+        $title = clean_for_database($_POST['title']);
+        $school = clean_for_database($_POST['school']);
+        $location = clean_for_database($_POST['location']);
+        $diploma = clean_for_database($_POST['diploma']);
         $start_date = $_POST['start_date'];
         $end_date = $_POST['end_date'] ?: null;
         $current_formation = isset($_POST['current_formation']) ? 1 : 0;
-        $description = sanitize_input($_POST['description']);
+        $description = clean_for_database($_POST['description']);
         $sort_order = (int)$_POST['sort_order'];
         $current_logo = $_POST['current_logo'] ?? null;
         
@@ -133,12 +133,10 @@ if ($action === 'list') {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Administration - Formations</title>
+    <title>Esteban DERENNE - Administration</title>
     
-    <!-- Favicon adaptatif au thème -->
-    <link rel="icon" href="../assets/logo/logo-clair.png" media="(prefers-color-scheme: light)">
-    <link rel="icon" href="../assets/logo/logo-sombre.png" media="(prefers-color-scheme: dark)">
-    <link rel="icon" href="../assets/logo/logo-clair.png"> <!-- Fallback -->
+    <!-- Favicon dynamique -->
+    <link rel="icon" type="image/png" href="../assets/logo/logo-sombre.png?v=5">
     
     
     <!-- PWA Meta Tags -->
@@ -405,5 +403,6 @@ if ($action === 'list') {
             preview.style.display = 'none';
         }
     </script>
+    <script src="favicon-theme.js"></script>
 </body>
 </html>

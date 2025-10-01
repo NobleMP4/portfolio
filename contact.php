@@ -13,10 +13,10 @@ if ($_POST && isset($_POST['submit_contact'])) {
         $error_message = 'Token de sécurité invalide. Veuillez réessayer.';
     } else {
         // Validation des données
-        $name = sanitize_input($_POST['name']);
-        $email = sanitize_input($_POST['email']);
-        $subject = sanitize_input($_POST['subject']);
-        $message = sanitize_input($_POST['message']);
+        $name = clean_for_database($_POST['name']);
+        $email = clean_for_database($_POST['email']);
+        $subject = clean_for_database($_POST['subject']);
+        $message = clean_for_database($_POST['message']);
         
         $errors = [];
         
@@ -84,12 +84,31 @@ $csrf_token = generate_csrf_token();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact - Portfolio</title>
+    <title>Esteban DERENNE</title>
     
-    <!-- Favicon adaptatif au thème -->
-    <link rel="icon" href="assets/logo/logo-clair.png" media="(prefers-color-scheme: light)">
-    <link rel="icon" href="assets/logo/logo-sombre.png" media="(prefers-color-scheme: dark)">
-    <link rel="icon" href="assets/logo/logo-clair.png"> <!-- Fallback -->
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Contactez Esteban DERENNE - Développeur Full Stack. Formulaire de contact pour discuter de projets, collaborations ou opportunités professionnelles.">
+    <meta name="keywords" content="Esteban DERENNE, contact, développeur, full stack, collaboration, projets, emploi, freelance, développement web">
+    <meta name="author" content="Esteban DERENNE">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Contactez Esteban DERENNE - Développeur Full Stack">
+    <meta property="og:description" content="Contactez Esteban DERENNE pour discuter de vos projets de développement web. Collaborations et opportunités professionnelles.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://esteban-derenne.fr/contact">
+    <meta property="og:image" content="https://esteban-derenne.fr/assets/img/photo-portfolio.png">
+    <meta property="og:site_name" content="Esteban DERENNE Portfolio">
+    <meta property="og:locale" content="fr_FR">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Contactez Esteban DERENNE - Développeur Full Stack">
+    <meta name="twitter:description" content="Contactez Esteban DERENNE pour discuter de vos projets de développement web.">
+    <meta name="twitter:image" content="https://esteban-derenne.fr/assets/img/photo-portfolio.png">
+    
+    <!-- Favicon dynamique -->
+    <link rel="icon" type="image/png" href="assets/logo/logo-sombre.png?v=5">
     
     <link rel="stylesheet" href="assets/css/style.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
@@ -132,7 +151,7 @@ $csrf_token = generate_csrf_token();
 
         <!-- Contact Section -->
         <section style="padding: 2rem 0; max-width: 1200px; margin: 0 auto;">
-            <div style="display: grid; grid-template-columns: 400px 1fr; gap: 3rem; align-items: start;" class="contact-layout">
+            <div class="contact-layout">
                 
                 <!-- Contact Info Card -->
                 <div style="background: var(--bg-secondary); border: 1px solid var(--border); border-radius: 12px; padding: 2rem;">
@@ -210,7 +229,7 @@ $csrf_token = generate_csrf_token();
                     <form method="POST" id="contactForm" novalidate>
                         <input type="hidden" name="csrf_token" value="<?php echo $csrf_token; ?>">
                         
-                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.5rem;" class="form-grid">
+                        <div class="form-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.5rem;">
                             <div>
                                 <label for="name" style="display: block; margin-bottom: 0.5rem; color: var(--text-primary); font-family: 'JetBrains Mono', monospace; font-size: 0.9rem;">Nom complet *</label>
                                 <input type="text" id="name" name="name" value="<?php echo isset($name) ? htmlspecialchars($name) : ''; ?>" required style="width: 100%; padding: 0.875rem; border: 1px solid var(--border); border-radius: 6px; background: var(--bg-primary); color: var(--text-primary); font-family: 'JetBrains Mono', monospace; font-size: 0.9rem; transition: all 0.3s ease;" onfocus="this.style.borderColor='var(--accent-blue)'; this.style.boxShadow='0 0 0 3px rgba(88, 166, 255, 0.1)'" onblur="this.style.borderColor='var(--border)'; this.style.boxShadow='none'">
@@ -248,5 +267,6 @@ $csrf_token = generate_csrf_token();
 
     <script src="assets/js/main.js"></script>
     <script src="assets/js/contact.js"></script>
+    <script src="assets/js/favicon-theme.js"></script>
 </body>
 </html>

@@ -9,12 +9,31 @@ $skills = getSkills($pdo);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>À propos - Portfolio</title>
+    <title>Esteban DERENNE</title>
     
-    <!-- Favicon adaptatif au thème -->
-    <link rel="icon" href="assets/logo/logo-clair.png" media="(prefers-color-scheme: light)">
-    <link rel="icon" href="assets/logo/logo-sombre.png" media="(prefers-color-scheme: dark)">
-    <link rel="icon" href="assets/logo/logo-clair.png"> <!-- Fallback -->
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="À propos d'Esteban DERENNE - Développeur Full Stack passionné. Découvrez mon parcours, mes compétences techniques et ma passion pour le développement web.">
+    <meta name="keywords" content="Esteban DERENNE, à propos, développeur, full stack, parcours, compétences, développement web, PHP, JavaScript">
+    <meta name="author" content="Esteban DERENNE">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="À propos d'Esteban DERENNE - Développeur Full Stack">
+    <meta property="og:description" content="Découvrez le parcours et les compétences d'Esteban DERENNE, développeur Full Stack passionné par le développement web.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://esteban-derenne.fr/a-propos">
+    <meta property="og:image" content="https://esteban-derenne.fr/assets/img/photo-portfolio.png">
+    <meta property="og:site_name" content="Esteban DERENNE Portfolio">
+    <meta property="og:locale" content="fr_FR">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="À propos d'Esteban DERENNE - Développeur Full Stack">
+    <meta name="twitter:description" content="Découvrez le parcours et les compétences d'Esteban DERENNE, développeur Full Stack.">
+    <meta name="twitter:image" content="https://esteban-derenne.fr/assets/img/photo-portfolio.png">
+    
+    <!-- Favicon dynamique -->
+    <link rel="icon" type="image/png" href="assets/logo/logo-sombre.png?v=5">
     
     <link rel="stylesheet" href="assets/css/style.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
@@ -59,8 +78,8 @@ $skills = getSkills($pdo);
 
         <!-- About Content -->
         <section style="padding: 2rem 0;">
-            <div style="max-width: 1000px; margin: 0 auto; display: grid; grid-template-columns: 300px 1fr; gap: 3rem; align-items: start;">
-                <div style="text-align: center;">
+            <div class="about-layout">
+                <div class="about-photo" style="text-align: center;">
                     <img src="assets/img/photo-portfolio.png" alt="Photo de profil" style="width: 100%; border-radius: 12px; border: 2px solid var(--border); box-shadow: 0 8px 25px rgba(88, 166, 255, 0.15);">
                     <div style="margin-top: 1.5rem;">
                         <a href="assets/cv/cv.pdf" class="btn btn-primary" target="_blank">
@@ -74,18 +93,13 @@ $skills = getSkills($pdo);
                             <span style="color: var(--text-muted);">// </span>Mon Histoire
                         </h2>
                         <p style="color: var(--text-secondary); line-height: 1.7; margin-bottom: 1.5rem;">
-                            Passionné par le développement web depuis plus de 5 ans, je crée des solutions digitales 
-                            innovantes qui allient performance technique et expérience utilisateur exceptionnelle.
+                        Passionné par le développement web, je conçois des solutions digitales qui allient performance technique et qualité d’utilisation.
                         </p>
                         <p style="color: var(--text-secondary); line-height: 1.7; margin-bottom: 1.5rem;">
-                            Diplômé d'un Master en Informatique spécialisé en développement web, j'ai eu l'opportunité 
-                            de travailler sur des projets variés, des sites vitrines aux applications web complexes. 
-                            Mon approche se base sur une veille technologique constante et une méthodologie rigoureuse.
+                            Diplômé d’un Bac+2 (DISII) en développement web, je continue de renforcer mes compétences et d’explorer de nouvelles technologies afin de progresser constamment dans ce domaine.
                         </p>
                         <p style="color: var(--text-secondary); line-height: 1.7;">
-                            J'aime particulièrement les défis techniques qui me permettent d'apprendre de nouvelles 
-                            technologies et d'améliorer mes compétences. La collaboration en équipe et le partage 
-                            de connaissances font partie intégrante de ma philosophie de travail.
+                        J’aime relever des défis techniques qui me poussent à évoluer et à élargir mes connaissances. Le travail en équipe et le partage de savoirs occupent également une place importante dans ma manière d’avancer.
                         </p>
                     </div>
                 </div>
@@ -99,7 +113,7 @@ $skills = getSkills($pdo);
                     <span style="color: var(--text-muted);">// </span>Mes Compétences
                 </h2>
                 
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-bottom: 3rem;">
+                <div class="skills-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-bottom: 3rem;">
                     <!-- Technologies -->
                     <div style="background: var(--bg-secondary); border: 1px solid var(--border); border-radius: 8px; padding: 1.5rem;">
                         <h3 style="font-family: 'JetBrains Mono', monospace; color: var(--accent-blue); margin-bottom: 1.5rem; font-size: 1.1rem;">
@@ -190,7 +204,7 @@ $skills = getSkills($pdo);
                     </h3>
                 </div>
 
-                <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 2rem;">
+                <div class="skills-categories" style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 2rem;">
                     <!-- Langues -->
                     <div style="background: var(--bg-secondary); border: 1px solid var(--border); border-radius: 8px; padding: 1.5rem;">
                         <h3 style="font-family: 'JetBrains Mono', monospace; color: var(--accent-blue); margin-bottom: 1.5rem; font-size: 1rem;">
@@ -295,5 +309,6 @@ $skills = getSkills($pdo);
     </div>
 
     <script src="assets/js/main.js"></script>
+    <script src="assets/js/favicon-theme.js"></script>
 </body>
 </html>

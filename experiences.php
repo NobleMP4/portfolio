@@ -9,12 +9,31 @@ $experiences = getExperiences($pdo);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Expériences - Portfolio</title>
+    <title>Esteban DERENNE</title>
     
-    <!-- Favicon adaptatif au thème -->
-    <link rel="icon" href="assets/logo/logo-clair.png" media="(prefers-color-scheme: light)">
-    <link rel="icon" href="assets/logo/logo-sombre.png" media="(prefers-color-scheme: dark)">
-    <link rel="icon" href="assets/logo/logo-clair.png"> <!-- Fallback -->
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Expériences professionnelles d'Esteban DERENNE - Développeur Full Stack. Découvrez mon parcours professionnel et mes réalisations dans le développement web.">
+    <meta name="keywords" content="Esteban DERENNE, expériences, parcours professionnel, développeur, full stack, carrière, développement web, emploi">
+    <meta name="author" content="Esteban DERENNE">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Expériences d'Esteban DERENNE - Parcours Professionnel">
+    <meta property="og:description" content="Découvrez le parcours professionnel d'Esteban DERENNE, développeur Full Stack avec une expérience solide en développement web.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://esteban-derenne.fr/experiences">
+    <meta property="og:image" content="https://esteban-derenne.fr/assets/img/photo-portfolio.png">
+    <meta property="og:site_name" content="Esteban DERENNE Portfolio">
+    <meta property="og:locale" content="fr_FR">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Expériences d'Esteban DERENNE - Parcours Professionnel">
+    <meta name="twitter:description" content="Découvrez le parcours professionnel d'Esteban DERENNE, développeur Full Stack.">
+    <meta name="twitter:image" content="https://esteban-derenne.fr/assets/img/photo-portfolio.png">
+    
+    <!-- Favicon dynamique -->
+    <link rel="icon" type="image/png" href="assets/logo/logo-sombre.png?v=5">
     
     <link rel="stylesheet" href="assets/css/style.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
@@ -56,7 +75,7 @@ $experiences = getExperiences($pdo);
         </section>
 
         <!-- Timeline -->
-        <section class="timeline-section" style="padding: 2rem 0;">
+        <section class="timeline-section">
             <div class="container">
             <div class="timeline">
                 <?php foreach ($experiences as $index => $experience): ?>
@@ -98,7 +117,23 @@ $experiences = getExperiences($pdo);
                             <?php endif; ?>
                             
                             <div class="experience-description">
-                                <p><?php echo nl2br(htmlspecialchars($experience['description'])); ?></p>
+                                <?php 
+                                $description = $experience['description'];
+                                $maxLength = 200; // Limite de caractères
+                                
+                                if (strlen($description) > $maxLength): 
+                                    $shortDescription = substr($description, 0, $maxLength) . '...';
+                                ?>
+                                <p class="description-text">
+                                    <span class="description-short"><?php echo nl2br(htmlspecialchars($shortDescription)); ?></span>
+                                    <span class="description-full" style="display: none;"><?php echo nl2br(htmlspecialchars($description)); ?></span>
+                                </p>
+                                <button class="read-more-btn" onclick="toggleDescription(this)">
+                                    <i class="fas fa-chevron-down"></i> Lire plus
+                                </button>
+                                <?php else: ?>
+                                <p><?php echo nl2br(htmlspecialchars($description)); ?></p>
+                                <?php endif; ?>
                             </div>
                             <?php if (!empty($experience['technologies'])): ?>
                             <div class="timeline-technologies">
@@ -124,5 +159,26 @@ $experiences = getExperiences($pdo);
     </div>
 
     <script src="assets/js/main.js"></script>
+    <script src="assets/js/favicon-theme.js"></script>
+    <script>
+    function toggleDescription(button) {
+        const descriptionText = button.previousElementSibling;
+        const shortSpan = descriptionText.querySelector('.description-short');
+        const fullSpan = descriptionText.querySelector('.description-full');
+        const icon = button.querySelector('i');
+        
+        if (fullSpan.style.display === 'none') {
+            // Afficher la description complète
+            shortSpan.style.display = 'none';
+            fullSpan.style.display = 'inline';
+            button.innerHTML = '<i class="fas fa-chevron-up"></i> Lire moins';
+        } else {
+            // Afficher la description courte
+            shortSpan.style.display = 'inline';
+            fullSpan.style.display = 'none';
+            button.innerHTML = '<i class="fas fa-chevron-down"></i> Lire plus';
+        }
+    }
+    </script>
 </body>
 </html>

@@ -42,12 +42,10 @@ try {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Administration - Dashboard</title>
+    <title>Esteban DERENNE - Administration</title>
     
-    <!-- Favicon adaptatif au thème -->
-    <link rel="icon" href="../assets/logo/logo-clair.png" media="(prefers-color-scheme: light)">
-    <link rel="icon" href="../assets/logo/logo-sombre.png" media="(prefers-color-scheme: dark)">
-    <link rel="icon" href="../assets/logo/logo-clair.png"> <!-- Fallback -->
+    <!-- Favicon dynamique -->
+    <link rel="icon" type="image/png" href="../assets/logo/logo-sombre.png?v=5">
     
     <!-- PWA Meta Tags -->
     <link rel="manifest" href="manifest.json">
@@ -236,5 +234,6 @@ try {
     
     <!-- PWA Installation Script -->
     <script src="pwa-install.js"></script>
+    <script src="favicon-theme.js"></script>
 </body>
 </html>

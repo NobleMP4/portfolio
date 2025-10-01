@@ -4,7 +4,7 @@
   "description": "Administration du portfolio - Gestion des projets, expériences, formations et compétences",
   "start_url": "/admin/",
   "display": "standalone",
-  "background_color": "#0d1117",
+  "background_color": "#ffffff",
   "theme_color": "#58a6ff",
   "orientation": "portrait-primary",
   "scope": "/admin/",
@@ -13,25 +13,25 @@
   "categories": ["productivity", "utilities"],
   "icons": [
     {
-      "src": "../assets/logo/logo-clair.png",
+      "src": "../assets/logo/logo-sombre.png",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "maskable any"
     },
     {
-      "src": "../assets/logo/logo-clair.png",
+      "src": "../assets/logo/logo-sombre.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "maskable any"
     },
     {
-      "src": "../assets/logo/logo-sombre.png",
+      "src": "../assets/logo/logo-clair.png",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "../assets/logo/logo-sombre.png",
+      "src": "../assets/logo/logo-clair.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any"
@@ -45,7 +45,7 @@
       "url": "/admin/index.php",
       "icons": [
         {
-          "src": "../assets/logo/logo-clair.png",
+          "src": "../assets/logo/logo-sombre.png",
           "sizes": "96x96"
         }
       ]
@@ -57,7 +57,7 @@
       "url": "/admin/projects.php",
       "icons": [
         {
-          "src": "../assets/logo/logo-clair.png",
+          "src": "../assets/logo/logo-sombre.png",
           "sizes": "96x96"
         }
       ]
@@ -69,7 +69,7 @@
       "url": "/admin/messages.php",
       "icons": [
         {
-          "src": "../assets/logo/logo-clair.png",
+          "src": "../assets/logo/logo-sombre.png",
           "sizes": "96x96"
         }
       ]
@@ -81,7 +81,7 @@
       "url": "/admin/settings.php",
       "icons": [
         {
-          "src": "../assets/logo/logo-clair.png",
+          "src": "../assets/logo/logo-sombre.png",
           "sizes": "96x96"
         }
       ]
@@ -89,14 +89,14 @@
   ],
   "screenshots": [
     {
-      "src": "../assets/logo/logo-clair.png",
+      "src": "../assets/logo/logo-sombre.png",
       "sizes": "1280x720",
       "type": "image/png",
       "form_factor": "wide",
       "label": "Interface d'administration du portfolio"
     },
     {
-      "src": "../assets/logo/logo-clair.png",
+      "src": "../assets/logo/logo-sombre.png",
       "sizes": "750x1334",
       "type": "image/png",
       "form_factor": "narrow",

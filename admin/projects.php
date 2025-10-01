@@ -14,10 +14,10 @@ $error_message = '';
 if ($_POST) {
     if (isset($_POST['add_project'])) {
         // Ajouter un projet
-        $title = sanitize_input($_POST['title']);
-        $description = sanitize_input($_POST['description']);
-        $link = sanitize_input($_POST['link']);
-        $technologies = sanitize_input($_POST['technologies']);
+        $title = clean_for_database($_POST['title']);
+        $description = clean_for_database($_POST['description']);
+        $link = clean_for_database($_POST['link']);
+        $technologies = clean_for_database($_POST['technologies']);
         $featured = isset($_POST['featured']) ? 1 : 0;
         $sort_order = (int)$_POST['sort_order'];
         
@@ -46,10 +46,10 @@ if ($_POST) {
     
     if (isset($_POST['edit_project'])) {
         // Modifier un projet
-        $title = sanitize_input($_POST['title']);
-        $description = sanitize_input($_POST['description']);
-        $link = sanitize_input($_POST['link']);
-        $technologies = sanitize_input($_POST['technologies']);
+        $title = clean_for_database($_POST['title']);
+        $description = clean_for_database($_POST['description']);
+        $link = clean_for_database($_POST['link']);
+        $technologies = clean_for_database($_POST['technologies']);
         $featured = isset($_POST['featured']) ? 1 : 0;
         $sort_order = (int)$_POST['sort_order'];
         
@@ -132,12 +132,10 @@ if ($action === 'list') {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Administration - Projets</title>
+    <title>Esteban DERENNE - Administration</title>
     
-    <!-- Favicon adaptatif au thème -->
-    <link rel="icon" href="../assets/logo/logo-clair.png" media="(prefers-color-scheme: light)">
-    <link rel="icon" href="../assets/logo/logo-sombre.png" media="(prefers-color-scheme: dark)">
-    <link rel="icon" href="../assets/logo/logo-clair.png"> <!-- Fallback -->
+    <!-- Favicon dynamique -->
+    <link rel="icon" type="image/png" href="../assets/logo/logo-sombre.png?v=5">
     
     <!-- PWA Meta Tags -->
     <link rel="manifest" href="manifest.json">
@@ -388,5 +386,6 @@ if ($action === 'list') {
     
     <!-- PWA Installation Script -->
     <script src="pwa-install.js"></script>
+    <script src="favicon-theme.js"></script>
 </body>
 </html>

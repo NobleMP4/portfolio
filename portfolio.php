@@ -9,12 +9,31 @@ $projects = getProjects($pdo);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio - Mes Projets</title>
+    <title>Esteban DERENNE</title>
     
-    <!-- Favicon adaptatif au thème -->
-    <link rel="icon" href="assets/logo/logo-clair.png" media="(prefers-color-scheme: light)">
-    <link rel="icon" href="assets/logo/logo-sombre.png" media="(prefers-color-scheme: dark)">
-    <link rel="icon" href="assets/logo/logo-clair.png"> <!-- Fallback -->
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Portfolio d'Esteban DERENNE - Découvrez mes projets de développement web. Applications full stack, sites web modernes et solutions techniques innovantes.">
+    <meta name="keywords" content="Esteban DERENNE, portfolio, projets, développement web, applications, full stack, PHP, JavaScript, React, Node.js">
+    <meta name="author" content="Esteban DERENNE">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Portfolio d'Esteban DERENNE - Projets de Développement">
+    <meta property="og:description" content="Découvrez les projets de développement web d'Esteban DERENNE. Applications full stack et solutions techniques innovantes.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://esteban-derenne.fr/projets">
+    <meta property="og:image" content="https://esteban-derenne.fr/assets/img/photo-portfolio.png">
+    <meta property="og:site_name" content="Esteban DERENNE Portfolio">
+    <meta property="og:locale" content="fr_FR">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Portfolio d'Esteban DERENNE - Projets de Développement">
+    <meta name="twitter:description" content="Découvrez les projets de développement web d'Esteban DERENNE.">
+    <meta name="twitter:image" content="https://esteban-derenne.fr/assets/img/photo-portfolio.png">
+    
+    <!-- Favicon dynamique -->
+    <link rel="icon" type="image/png" href="assets/logo/logo-sombre.png?v=5">
     
     <link rel="stylesheet" href="assets/css/style.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
@@ -56,7 +75,7 @@ $projects = getProjects($pdo);
         </section>
 
         <!-- Portfolio Grid -->
-        <section class="portfolio-grid" style="padding: 2rem 0;">
+        <section class="portfolio-grid">
             <div class="container">
             <div class="projects-grid">
                 <?php foreach ($projects as $project): ?>
@@ -120,6 +139,7 @@ $projects = getProjects($pdo);
     </div>
 
     <script src="assets/js/main.js"></script>
+    <script src="assets/js/favicon-theme.js"></script>
     <script>
     // Données des projets pour les modales
     const projectsData = <?php echo json_encode($projects); ?>;

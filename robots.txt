@@ -1,0 +1,16 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://esteban-derenne.fr/sitemap.xml
+
+# Disallow admin area
+Disallow: /admin/
+
+# Disallow config files
+Disallow: /config/
+Disallow: /includes/
+Disallow: /database/
+
+# Allow assets
+Allow: /assets/

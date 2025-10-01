@@ -1,9 +1,20 @@
 RewriteEngine On
 
-# Enlever l'extension .php des URLs
+# URLs personnalisées
+RewriteRule ^a-propos$ about.php [NC,L]
+RewriteRule ^projets$ portfolio.php [NC,L]
+RewriteRule ^experiences$ experiences.php [NC,L]
+RewriteRule ^formations$ formations.php [NC,L]
+RewriteRule ^contact$ contact.php [NC,L]
+
+# Enlever l'extension .php des autres URLs
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteRule ^([^\.]+)$ $1.php [NC,L]
+
+# Rediriger les anciennes URLs vers les nouvelles
+RewriteRule ^about$ /a-propos [NC,L,R=301]
+RewriteRule ^portfolio$ /projets [NC,L,R=301]
 
 # Rediriger les URLs avec .php vers les URLs sans extension
 RewriteCond %{THE_REQUEST} /([^.]+)\.php [NC]

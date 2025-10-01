@@ -23,15 +23,26 @@ if ($_POST) {
         $description = sanitize_input($_POST['description']);
         $sort_order = (int)$_POST['sort_order'];
         
-        try {
-            $sql = "INSERT INTO formations (title, school, location, diploma, start_date, end_date, current_formation, description, sort_order) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
-            $stmt = $pdo->prepare($sql);
-            $stmt->execute([$title, $school, $location, $diploma, $start_date, $end_date, $current_formation, $description, $sort_order]);
-            
-            $success_message = 'Formation ajoutée avec succès !';
-            $action = 'list';
-        } catch (PDOException $e) {
-            $error_message = 'Erreur lors de l\'ajout de la formation.';
+        // Gestion du logo
+        $logo = null;
+        if (isset($_FILES['logo']) && $_FILES['logo']['error'] === UPLOAD_ERR_OK) {
+            $logo = uploadFormationImage($_FILES['logo']);
+            if (!$logo) {
+                $error_message = 'Erreur lors de l\'upload du logo.';
+            }
+        }
+        
+        if (!$error_message) {
+            try {
+                $sql = "INSERT INTO formations (title, school, logo, location, diploma, start_date, end_date, current_formation, description, sort_order) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                $stmt = $pdo->prepare($sql);
+                $stmt->execute([$title, $school, $logo, $location, $diploma, $start_date, $end_date, $current_formation, $description, $sort_order]);
+                
+                $success_message = 'Formation ajoutée avec succès !';
+                $action = 'list';
+            } catch (PDOException $e) {
+                $error_message = 'Erreur lors de l\'ajout de la formation.';
+            }
         }
     }
     
@@ -45,16 +56,33 @@ if ($_POST) {
         $current_formation = isset($_POST['current_formation']) ? 1 : 0;
         $description = sanitize_input($_POST['description']);
         $sort_order = (int)$_POST['sort_order'];
+        $current_logo = $_POST['current_logo'] ?? null;
         
-        try {
-            $sql = "UPDATE formations SET title = ?, school = ?, location = ?, diploma = ?, start_date = ?, end_date = ?, current_formation = ?, description = ?, sort_order = ? WHERE id = ?";
-            $stmt = $pdo->prepare($sql);
-            $stmt->execute([$title, $school, $location, $diploma, $start_date, $end_date, $current_formation, $description, $sort_order, $formation_id]);
+        // Gestion du logo
+        $logo = $current_logo;
+        if (isset($_FILES['logo']) && $_FILES['logo']['error'] === UPLOAD_ERR_OK) {
+            // Supprimer l'ancien logo si il existe
+            if ($current_logo) {
+                deleteFormationImage($current_logo);
+            }
             
-            $success_message = 'Formation modifiée avec succès !';
-            $action = 'list';
-        } catch (PDOException $e) {
-            $error_message = 'Erreur lors de la modification de la formation.';
+            $logo = uploadFormationImage($_FILES['logo'], $formation_id);
+            if (!$logo) {
+                $error_message = 'Erreur lors de l\'upload du logo.';
+            }
+        }
+        
+        if (!$error_message) {
+            try {
+                $sql = "UPDATE formations SET title = ?, school = ?, logo = ?, location = ?, diploma = ?, start_date = ?, end_date = ?, current_formation = ?, description = ?, sort_order = ? WHERE id = ?";
+                $stmt = $pdo->prepare($sql);
+                $stmt->execute([$title, $school, $logo, $location, $diploma, $start_date, $end_date, $current_formation, $description, $sort_order, $formation_id]);
+                
+                $success_message = 'Formation modifiée avec succès !';
+                $action = 'list';
+            } catch (PDOException $e) {
+                $error_message = 'Erreur lors de la modification de la formation.';
+            }
         }
     }
 }
@@ -62,8 +90,19 @@ if ($_POST) {
 // Supprimer une formation
 if ($action === 'delete' && $formation_id) {
     try {
+        // Récupérer le logo avant suppression
+        $stmt = $pdo->prepare("SELECT logo FROM formations WHERE id = ?");
+        $stmt->execute([$formation_id]);
+        $formation = $stmt->fetch();
+        
+        // Supprimer la formation
         $stmt = $pdo->prepare("DELETE FROM formations WHERE id = ?");
         $stmt->execute([$formation_id]);
+        
+        // Supprimer le logo si il existe
+        if ($formation && $formation['logo']) {
+            deleteFormationImage($formation['logo']);
+        }
         
         $success_message = 'Formation supprimée avec succès !';
         $action = 'list';
@@ -198,6 +237,7 @@ if ($action === 'list') {
                                     <tr>
                                         <th>Formation</th>
                                         <th>École</th>
+                                        <th>Logo</th>
                                         <th>Période</th>
                                         <th>Diplôme</th>
                                         <th>Actions</th>
@@ -213,6 +253,13 @@ if ($action === 'list') {
                                             <?php echo htmlspecialchars($formation['school']); ?>
                                             <?php if (!empty($formation['location'])): ?>
                                                 <br><small style="color: var(--text-secondary);"><?php echo htmlspecialchars($formation['location']); ?></small>
+                                            <?php endif; ?>
+                                        </td>
+                                        <td>
+                                            <?php if (!empty($formation['logo'])): ?>
+                                                <img src="../<?php echo htmlspecialchars($formation['logo']); ?>" alt="Logo" style="width: 40px; height: 40px; object-fit: contain; border: 1px solid var(--border); border-radius: 4px;">
+                                            <?php else: ?>
+                                                <span style="color: var(--text-secondary); font-size: 0.8rem;">Aucun logo</span>
                                             <?php endif; ?>
                                         </td>
                                         <td>
@@ -250,7 +297,7 @@ if ($action === 'list') {
                         </a>
                     </div>
                     <div class="card-body">
-                        <form method="POST">
+                        <form method="POST" enctype="multipart/form-data">
                             <div class="form-row">
                                 <div class="form-group">
                                     <label for="title">Formation *</label>
@@ -259,6 +306,22 @@ if ($action === 'list') {
                                 <div class="form-group">
                                     <label for="school">École/Organisme *</label>
                                     <input type="text" id="school" name="school" required value="<?php echo isset($formation) ? htmlspecialchars($formation['school']) : ''; ?>">
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="logo">Logo de l'école/formation</label>
+                                <input type="file" id="logo" name="logo" accept="image/*" onchange="previewFormationLogo(this)">
+                                <?php if (isset($formation) && !empty($formation['logo'])): ?>
+                                <input type="hidden" name="current_logo" value="<?php echo htmlspecialchars($formation['logo']); ?>">
+                                <div class="current-logo">
+                                    <p>Logo actuel :</p>
+                                    <img src="../<?php echo htmlspecialchars($formation['logo']); ?>" alt="Logo actuel" style="width: 80px; height: 80px; object-fit: contain; border: 2px solid var(--border); border-radius: 8px;">
+                                </div>
+                                <?php endif; ?>
+                                <div id="logoPreview" class="logo-preview" style="display: none;">
+                                    <img id="previewImg" src="" alt="Aperçu" style="width: 80px; height: 80px; object-fit: contain; border: 2px solid var(--border); border-radius: 8px;">
+                                    <button type="button" class="btn-remove-logo" onclick="removeFormationLogo()">×</button>
                                 </div>
                             </div>
                             
@@ -317,5 +380,30 @@ if ($action === 'list') {
 
     <!-- PWA Installation Script -->
     <script src="pwa-install.js"></script>
+    <script>
+        function previewFormationLogo(input) {
+            const preview = document.getElementById('logoPreview');
+            const previewImg = document.getElementById('previewImg');
+
+            if (input.files && input.files[0]) {
+                const reader = new FileReader();
+
+                reader.onload = function(e) {
+                    previewImg.src = e.target.result;
+                    preview.style.display = 'inline-block';
+                }
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        function removeFormationLogo() {
+            const input = document.getElementById('logo');
+            const preview = document.getElementById('logoPreview');
+
+            input.value = '';
+            preview.style.display = 'none';
+        }
+    </script>
 </body>
 </html>

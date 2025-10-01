@@ -35,8 +35,8 @@ $formations = getFormations($pdo);
         </div>
         <div class="terminal-body">
             <a href="/" class="nav-command" data-tooltip="Retour à la page d'accueil">Accueil</a>
-            <a href="/about" class="nav-command" data-tooltip="Découvrir mon parcours">À propos</a>
-            <a href="/portfolio" class="nav-command" data-tooltip="Voir mes réalisations">Mes projets</a>
+            <a href="/a-propos" class="nav-command" data-tooltip="Découvrir mon parcours">À propos</a>
+            <a href="/projets" class="nav-command" data-tooltip="Voir mes réalisations">Mes projets</a>
             <a href="/experiences" class="nav-command" data-tooltip="Mon expérience professionnelle">Expériences</a>
             <a href="/formations" class="nav-command active" data-tooltip="Page actuelle">Formations</a>
             <a href="/contact" class="nav-command" data-tooltip="Me contacter">Contact</a>
@@ -61,41 +61,48 @@ $formations = getFormations($pdo);
             <div class="education-grid">
                 <?php foreach ($formations as $formation): ?>
                 <div class="education-card">
-                    <div class="education-header">
-                        <div class="education-icon">
-                            <i class="fas fa-graduation-cap"></i>
+                    <div class="formation-header">
+                        <?php if (!empty($formation['logo'])): ?>
+                        <div class="formation-logo-full">
+                            <img src="<?php echo htmlspecialchars($formation['logo']); ?>" alt="<?php echo htmlspecialchars($formation['school']); ?>" loading="lazy">
                         </div>
-                        <div class="education-period">
+                        <?php endif; ?>
+                        <div class="formation-title-section">
+                            <h3><?php echo htmlspecialchars($formation['title']); ?></h3>
+                            <h4><?php echo htmlspecialchars($formation['school']); ?></h4>
+                        </div>
+                        <div class="formation-period">
                             <?php echo formatPeriod($formation['start_date'], $formation['end_date'], $formation['current_formation']); ?>
                         </div>
                     </div>
-                    <div class="education-content">
-                        <h3><?php echo htmlspecialchars($formation['title']); ?></h3>
-                        <h4>
-                            <i class="fas fa-university"></i>
-                            <?php echo htmlspecialchars($formation['school']); ?>
-                            <?php if (!empty($formation['location'])): ?>
-                            <span class="location">
-                                <i class="fas fa-map-marker-alt"></i>
-                                <?php echo htmlspecialchars($formation['location']); ?>
-                            </span>
-                            <?php endif; ?>
-                        </h4>
-                        <?php if (!empty($formation['diploma'])): ?>
-                        <div class="diploma">
-                            <i class="fas fa-certificate"></i>
-                            <strong>Diplôme :</strong> <?php echo htmlspecialchars($formation['diploma']); ?>
+                    
+                    <div class="formation-details">
+                        <?php if (!empty($formation['location'])): ?>
+                        <div class="detail-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span><?php echo htmlspecialchars($formation['location']); ?></span>
                         </div>
                         <?php endif; ?>
+                        
+                        <?php if (!empty($formation['diploma'])): ?>
+                        <div class="detail-item">
+                            <i class="fas fa-certificate"></i>
+                            <span><?php echo htmlspecialchars($formation['diploma']); ?></span>
+                        </div>
+                        <?php endif; ?>
+                        
                         <?php if ($formation['current_formation']): ?>
                         <div class="current-badge">
                             <i class="fas fa-clock"></i> Formation en cours
                         </div>
                         <?php endif; ?>
-                        <?php if (!empty($formation['description'])): ?>
-                        <p><?php echo nl2br(htmlspecialchars($formation['description'])); ?></p>
-                        <?php endif; ?>
                     </div>
+                    
+                    <?php if (!empty($formation['description'])): ?>
+                    <div class="formation-description">
+                        <p><?php echo nl2br(htmlspecialchars($formation['description'])); ?></p>
+                    </div>
+                    <?php endif; ?>
                 </div>
                 <?php endforeach; ?>
             </div>

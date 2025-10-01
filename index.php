@@ -38,8 +38,8 @@ $recentProjects = getRecentProjects($pdo, 4);
         </div>
         <div class="terminal-body">
             <a href="/" class="nav-command" data-tooltip="Retour à la page d'accueil">Accueil</a>
-            <a href="/about" class="nav-command" data-tooltip="Découvrir mon parcours">À propos</a>
-            <a href="/portfolio" class="nav-command" data-tooltip="Voir mes réalisations">Mes projets</a>
+            <a href="/a-propos" class="nav-command" data-tooltip="Découvrir mon parcours">À propos</a>
+            <a href="/projets" class="nav-command" data-tooltip="Voir mes réalisations">Mes projets</a>
             <a href="/experiences" class="nav-command" data-tooltip="Mon expérience professionnelle">Expériences</a>
             <a href="/formations" class="nav-command" data-tooltip="Mon parcours de formation">Formations</a>
             <a href="/contact" class="nav-command" data-tooltip="Me contacter">Contact</a>
@@ -60,7 +60,7 @@ $recentProjects = getRecentProjects($pdo, 4);
                     </div>
                     
                     <div class="hero-buttons">
-                        <a href="/portfolio" class="btn btn-primary">
+                        <a href="/projets" class="btn btn-primary">
                             <i class="fas fa-eye"></i>
                             Découvrir mes réalisations
                         </a>

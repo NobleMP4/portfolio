@@ -242,4 +242,48 @@ function paginate($total_items, $items_per_page, $current_page) {
         'has_next' => $current_page < $total_pages
     ];
 }
+
+/**
+ * Upload d'image pour les formations
+ */
+function uploadFormationImage($file, $formation_id = null) {
+    if (!isset($file) || $file['error'] !== UPLOAD_ERR_OK) {
+        return false;
+    }
+    
+    $allowed_types = ['image/jpeg', 'image/png', 'image/gif', 'image/webp'];
+    if (!in_array($file['type'], $allowed_types)) {
+        return false;
+    }
+    
+    $max_size = 2 * 1024 * 1024; // 2MB
+    if ($file['size'] > $max_size) {
+        return false;
+    }
+    
+    $upload_dir = '../assets/images/logos/';
+    if (!is_dir($upload_dir)) {
+        mkdir($upload_dir, 0755, true);
+    }
+    
+    $extension = pathinfo($file['name'], PATHINFO_EXTENSION);
+    $filename = 'formation_' . ($formation_id ? $formation_id . '_' : '') . uniqid() . '.' . $extension;
+    $filepath = $upload_dir . $filename;
+    
+    if (move_uploaded_file($file['tmp_name'], $filepath)) {
+        return 'assets/images/logos/' . $filename;
+    }
+    
+    return false;
+}
+
+/**
+ * Supprimer une image de formation
+ */
+function deleteFormationImage($image_path) {
+    if ($image_path && file_exists('../' . $image_path)) {
+        return unlink('../' . $image_path);
+    }
+    return true;
+}
 ?>

@@ -35,8 +35,8 @@ $experiences = getExperiences($pdo);
         </div>
         <div class="terminal-body">
             <a href="/" class="nav-command" data-tooltip="Retour à la page d'accueil">Accueil</a>
-            <a href="/about" class="nav-command" data-tooltip="Découvrir mon parcours">À propos</a>
-            <a href="/portfolio" class="nav-command" data-tooltip="Voir mes réalisations">Mes projets</a>
+            <a href="/a-propos" class="nav-command" data-tooltip="Découvrir mon parcours">À propos</a>
+            <a href="/projets" class="nav-command" data-tooltip="Voir mes réalisations">Mes projets</a>
             <a href="/experiences" class="nav-command active" data-tooltip="Page actuelle">Expériences</a>
             <a href="/formations" class="nav-command" data-tooltip="Mon parcours de formation">Formations</a>
             <a href="/contact" class="nav-command" data-tooltip="Me contacter">Contact</a>
@@ -66,23 +66,40 @@ $experiences = getExperiences($pdo);
                             <?php echo formatPeriod($experience['start_date'], $experience['end_date'], $experience['current_position']); ?>
                         </div>
                         <div class="timeline-card">
-                            <h3><?php echo htmlspecialchars($experience['title']); ?></h3>
-                            <h4>
-                                <i class="fas fa-building"></i>
-                                <?php echo htmlspecialchars($experience['company']); ?>
-                                <?php if (!empty($experience['location'])): ?>
-                                <span class="location">
-                                    <i class="fas fa-map-marker-alt"></i>
-                                    <?php echo htmlspecialchars($experience['location']); ?>
-                                </span>
+                            <div class="experience-header">
+                                <?php if (!empty($experience['logo'])): ?>
+                                <div class="company-logo">
+                                    <img src="<?php echo htmlspecialchars($experience['logo']); ?>" alt="<?php echo htmlspecialchars($experience['company']); ?>" loading="lazy">
+                                </div>
                                 <?php endif; ?>
-                            </h4>
+                                <div class="experience-info">
+                                    <h3><?php echo htmlspecialchars($experience['title']); ?></h3>
+                                </div>
+                            </div>
+                            
+                            <div class="experience-details">
+                                <div class="detail-item">
+                                    <i class="fas fa-building"></i>
+                                    <span><?php echo htmlspecialchars($experience['company']); ?></span>
+                                </div>
+                                
+                                <?php if (!empty($experience['location'])): ?>
+                                <div class="detail-item">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    <span><?php echo htmlspecialchars($experience['location']); ?></span>
+                                </div>
+                                <?php endif; ?>
+                            </div>
+                            
                             <?php if ($experience['current_position']): ?>
                             <div class="current-badge">
                                 <i class="fas fa-clock"></i> Poste actuel
                             </div>
                             <?php endif; ?>
-                            <p><?php echo nl2br(htmlspecialchars($experience['description'])); ?></p>
+                            
+                            <div class="experience-description">
+                                <p><?php echo nl2br(htmlspecialchars($experience['description'])); ?></p>
+                            </div>
                             <?php if (!empty($experience['technologies'])): ?>
                             <div class="timeline-technologies">
                                 <strong>Technologies utilisées :</strong>

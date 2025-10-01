@@ -37,8 +37,8 @@ $skills = getSkills($pdo);
         </div>
         <div class="terminal-body">
             <a href="/" class="nav-command" data-tooltip="Retour à la page d'accueil">Accueil</a>
-            <a href="/about" class="nav-command active" data-tooltip="Page actuelle">À propos</a>
-            <a href="/portfolio" class="nav-command" data-tooltip="Voir mes réalisations">Mes projets</a>
+            <a href="/a-propos" class="nav-command active" data-tooltip="Page actuelle">À propos</a>
+            <a href="/projets" class="nav-command" data-tooltip="Voir mes réalisations">Mes projets</a>
             <a href="/experiences" class="nav-command" data-tooltip="Mon expérience professionnelle">Expériences</a>
             <a href="/formations" class="nav-command" data-tooltip="Mon parcours de formation">Formations</a>
             <a href="/contact" class="nav-command" data-tooltip="Me contacter">Contact</a>

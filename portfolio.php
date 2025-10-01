@@ -35,8 +35,8 @@ $projects = getProjects($pdo);
         </div>
         <div class="terminal-body">
             <a href="/" class="nav-command" data-tooltip="Retour à la page d'accueil">Accueil</a>
-            <a href="/about" class="nav-command" data-tooltip="Découvrir mon parcours">À propos</a>
-            <a href="/portfolio" class="nav-command active" data-tooltip="Page actuelle">Mes projets</a>
+            <a href="/a-propos" class="nav-command" data-tooltip="Découvrir mon parcours">À propos</a>
+            <a href="/projets" class="nav-command active" data-tooltip="Page actuelle">Mes projets</a>
             <a href="/experiences" class="nav-command" data-tooltip="Mon expérience professionnelle">Expériences</a>
             <a href="/formations" class="nav-command" data-tooltip="Mon parcours de formation">Formations</a>
             <a href="/contact" class="nav-command" data-tooltip="Me contacter">Contact</a>
@@ -62,7 +62,14 @@ $projects = getProjects($pdo);
                 <?php foreach ($projects as $project): ?>
                 <div class="project-card" onclick="openProjectModal(<?php echo $project['id']; ?>)">
                     <div class="project-header">
-                        <h3 class="project-title"><?php echo htmlspecialchars($project['title']); ?></h3>
+                        <div class="project-title-section">
+                            <?php if (!empty($project['image'])): ?>
+                            <div class="project-thumbnail">
+                                <img src="<?php echo htmlspecialchars($project['image']); ?>" alt="<?php echo htmlspecialchars($project['title']); ?>" loading="lazy">
+                            </div>
+                            <?php endif; ?>
+                            <h3 class="project-title"><?php echo htmlspecialchars($project['title']); ?></h3>
+                        </div>
                         <?php if (!empty($project['technologies'])): ?>
                         <div class="project-tech">
                             <?php 

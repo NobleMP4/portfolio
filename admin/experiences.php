@@ -21,12 +21,22 @@ if ($_POST) {
         $current_position = isset($_POST['current_position']) ? 1 : 0;
         $description = sanitize_input($_POST['description']);
         $technologies = sanitize_input($_POST['technologies']);
+        $logo = '';
         $sort_order = (int)$_POST['sort_order'];
         
+        // Gestion de l'upload du logo
+        if (isset($_FILES['logo']) && $_FILES['logo']['error'] === UPLOAD_ERR_OK) {
+            try {
+                $logo = uploadImage($_FILES['logo'], '../assets/images/logos/');
+            } catch (Exception $e) {
+                $error_message = $e->getMessage();
+            }
+        }
+        
         try {
-            $sql = "INSERT INTO experiences (title, company, location, start_date, end_date, current_position, description, technologies, sort_order) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            $sql = "INSERT INTO experiences (title, company, location, start_date, end_date, current_position, description, technologies, logo, sort_order) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
             $stmt = $pdo->prepare($sql);
-            $stmt->execute([$title, $company, $location, $start_date, $end_date, $current_position, $description, $technologies, $sort_order]);
+            $stmt->execute([$title, $company, $location, $start_date, $end_date, $current_position, $description, $technologies, $logo, $sort_order]);
             
             $success_message = 'Expérience ajoutée avec succès !';
             $action = 'list';
@@ -44,12 +54,29 @@ if ($_POST) {
         $current_position = isset($_POST['current_position']) ? 1 : 0;
         $description = sanitize_input($_POST['description']);
         $technologies = sanitize_input($_POST['technologies']);
+        $logo = '';
         $sort_order = (int)$_POST['sort_order'];
         
+        // Gestion de l'upload du logo
+        if (isset($_FILES['logo']) && $_FILES['logo']['error'] === UPLOAD_ERR_OK) {
+            try {
+                // Supprimer l'ancien logo s'il existe
+                if (isset($_POST['current_logo']) && !empty($_POST['current_logo'])) {
+                    deleteImage('../' . $_POST['current_logo']);
+                }
+                $logo = uploadImage($_FILES['logo'], '../assets/images/logos/');
+            } catch (Exception $e) {
+                $error_message = $e->getMessage();
+            }
+        } elseif (isset($_POST['current_logo']) && !empty($_POST['current_logo'])) {
+            // Garder le logo existant si aucun nouveau n'est uploadé
+            $logo = sanitize_input($_POST['current_logo']);
+        }
+        
         try {
-            $sql = "UPDATE experiences SET title = ?, company = ?, location = ?, start_date = ?, end_date = ?, current_position = ?, description = ?, technologies = ?, sort_order = ? WHERE id = ?";
+            $sql = "UPDATE experiences SET title = ?, company = ?, location = ?, start_date = ?, end_date = ?, current_position = ?, description = ?, technologies = ?, logo = ?, sort_order = ? WHERE id = ?";
             $stmt = $pdo->prepare($sql);
-            $stmt->execute([$title, $company, $location, $start_date, $end_date, $current_position, $description, $technologies, $sort_order, $experience_id]);
+            $stmt->execute([$title, $company, $location, $start_date, $end_date, $current_position, $description, $technologies, $logo, $sort_order, $experience_id]);
             
             $success_message = 'Expérience modifiée avec succès !';
             $action = 'list';
@@ -196,6 +223,7 @@ if ($action === 'list') {
                             <table class="table">
                                 <thead>
                                     <tr>
+                                        <th>Logo</th>
                                         <th>Poste</th>
                                         <th>Entreprise</th>
                                         <th>Période</th>
@@ -207,6 +235,15 @@ if ($action === 'list') {
                                 <tbody>
                                     <?php foreach ($experiences as $experience): ?>
                                     <tr>
+                                        <td>
+                                            <?php if (!empty($experience['logo'])): ?>
+                                                <img src="../<?php echo htmlspecialchars($experience['logo']); ?>" alt="<?php echo htmlspecialchars($experience['company']); ?>" style="width: 40px; height: 40px; object-fit: contain; border-radius: 4px;">
+                                            <?php else: ?>
+                                                <div style="width: 40px; height: 40px; background: var(--bg-tertiary); border-radius: 4px; display: flex; align-items: center; justify-content: center; color: var(--text-muted);">
+                                                    <i class="fas fa-building"></i>
+                                                </div>
+                                            <?php endif; ?>
+                                        </td>
                                         <td>
                                             <strong><?php echo htmlspecialchars($experience['title']); ?></strong>
                                         </td>
@@ -253,7 +290,10 @@ if ($action === 'list') {
                         </a>
                     </div>
                     <div class="card-body">
-                        <form method="POST">
+                        <form method="POST" enctype="multipart/form-data">
+                            <?php if (isset($experience) && !empty($experience['logo'])): ?>
+                            <input type="hidden" name="current_logo" value="<?php echo htmlspecialchars($experience['logo']); ?>">
+                            <?php endif; ?>
                             <div class="form-row">
                                 <div class="form-group">
                                     <label for="title">Poste *</label>
@@ -270,6 +310,28 @@ if ($action === 'list') {
                                     <label for="location">Lieu</label>
                                     <input type="text" id="location" name="location" value="<?php echo isset($experience) ? htmlspecialchars($experience['location']) : ''; ?>">
                                 </div>
+                                <div class="form-group">
+                                    <label for="logo">Logo de l'entreprise</label>
+                                    <div class="logo-upload-container">
+                                        <input type="file" id="logo" name="logo" accept="image/*" onchange="previewLogo(this)">
+                                        <div class="logo-preview" id="logoPreview" style="display: none;">
+                                            <img id="previewImg" src="" alt="Aperçu du logo">
+                                            <button type="button" onclick="removeLogo()" class="btn-remove-logo">
+                                                <i class="fas fa-times"></i>
+                                            </button>
+                                        </div>
+                                        <?php if (isset($experience) && !empty($experience['logo'])): ?>
+                                        <div class="current-logo">
+                                            <p>Logo actuel :</p>
+                                            <img src="../<?php echo htmlspecialchars($experience['logo']); ?>" alt="Logo actuel" style="width: 60px; height: 60px; object-fit: contain; border-radius: 4px; border: 1px solid var(--border);">
+                                        </div>
+                                        <?php endif; ?>
+                                    </div>
+                                    <small class="form-help">Formats acceptés : JPG, PNG, GIF, WebP (max 2MB)</small>
+                                </div>
+                            </div>
+                            
+                            <div class="form-row">
                                 <div class="form-group">
                                     <label for="sort_order">Ordre d'affichage</label>
                                     <input type="number" id="sort_order" name="sort_order" value="<?php echo isset($experience) ? $experience['sort_order'] : '0'; ?>">
@@ -319,5 +381,8 @@ if ($action === 'list') {
 
     <!-- PWA Installation Script -->
     <script src="pwa-install.js"></script>
+    
+    <!-- Admin JavaScript -->
+    <script src="../assets/js/admin.js"></script>
 </body>
 </html>

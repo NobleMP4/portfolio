@@ -776,6 +776,61 @@ body {
     color: var(--primary-color);
 }
 
+/* Upload d'images */
+.logo-upload-container {
+    margin-bottom: 1rem;
+}
+
+.logo-preview {
+    position: relative;
+    display: inline-block;
+    margin-top: 1rem;
+}
+
+.logo-preview img {
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+    border: 2px solid var(--border);
+    border-radius: 8px;
+    background: var(--bg-primary);
+}
+
+.btn-remove-logo {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: var(--error);
+    color: white;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+}
+
+.btn-remove-logo:hover {
+    background: #dc2626;
+}
+
+.current-logo {
+    margin-top: 1rem;
+    padding: 1rem;
+    background: var(--bg-tertiary);
+    border-radius: 8px;
+    border: 1px solid var(--border);
+}
+
+.current-logo p {
+    margin: 0 0 0.5rem 0;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+}
+
 /* Utilities */
 .text-center { text-align: center; }
 .text-right { text-align: right; }

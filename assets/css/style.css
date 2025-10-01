@@ -1528,7 +1528,8 @@ section {
 }
 
 .modal-content {
-    background-color: white;
+    background-color: var(--bg-secondary);
+    border: 1px solid var(--border);
     margin: 5% auto;
     padding: 0;
     border-radius: 1rem;
@@ -1543,18 +1544,26 @@ section {
     position: absolute;
     top: 1rem;
     right: 1rem;
-    color: white;
+    color: var(--text-primary);
     font-size: 2rem;
     font-weight: bold;
     cursor: pointer;
     z-index: 1001;
-    background: rgba(0,0,0,0.5);
+    background: var(--bg-tertiary);
+    border: 1px solid var(--border);
     width: 40px;
     height: 40px;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.close:hover {
+    background: var(--accent-blue);
+    color: var(--bg-primary);
+    border-color: var(--accent-blue);
 }
 
 .modal-project {
@@ -1562,6 +1571,17 @@ section {
     grid-template-columns: 1fr 1fr;
     gap: 2rem;
     padding: 2rem;
+}
+
+.modal-project h2 {
+    color: var(--text-primary);
+    margin-bottom: 1rem;
+}
+
+.modal-description {
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin-bottom: 1rem;
 }
 
 .modal-image {

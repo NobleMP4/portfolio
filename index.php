@@ -37,12 +37,12 @@ $recentProjects = getRecentProjects($pdo, 4);
             <div class="terminal-title">Navigation</div>
         </div>
         <div class="terminal-body">
-            <a href="index.php" class="nav-command" data-tooltip="Retour à la page d'accueil">Accueil</a>
-            <a href="about.php" class="nav-command" data-tooltip="Découvrir mon parcours">À propos</a>
-            <a href="portfolio.php" class="nav-command" data-tooltip="Voir mes réalisations">Mes projets</a>
-            <a href="experiences.php" class="nav-command" data-tooltip="Mon expérience professionnelle">Expériences</a>
-            <a href="formations.php" class="nav-command" data-tooltip="Mon parcours de formation">Formations</a>
-            <a href="contact.php" class="nav-command" data-tooltip="Me contacter">Contact</a>
+            <a href="/" class="nav-command" data-tooltip="Retour à la page d'accueil">Accueil</a>
+            <a href="/about" class="nav-command" data-tooltip="Découvrir mon parcours">À propos</a>
+            <a href="/portfolio" class="nav-command" data-tooltip="Voir mes réalisations">Mes projets</a>
+            <a href="/experiences" class="nav-command" data-tooltip="Mon expérience professionnelle">Expériences</a>
+            <a href="/formations" class="nav-command" data-tooltip="Mon parcours de formation">Formations</a>
+            <a href="/contact" class="nav-command" data-tooltip="Me contacter">Contact</a>
         </div>
     </div>
 
@@ -60,11 +60,11 @@ $recentProjects = getRecentProjects($pdo, 4);
                     </div>
                     
                     <div class="hero-buttons">
-                        <a href="portfolio.php" class="btn btn-primary">
+                        <a href="/portfolio" class="btn btn-primary">
                             <i class="fas fa-eye"></i>
                             Découvrir mes réalisations
                         </a>
-                        <a href="contact.php" class="btn">
+                        <a href="/contact" class="btn">
                             <i class="fas fa-envelope"></i>
                             Me contacter
                         </a>

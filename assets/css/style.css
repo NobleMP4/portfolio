@@ -1139,7 +1139,8 @@ section {
 }
 
 .value-card {
-    background: white;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border);
     padding: 2rem;
     border-radius: 1rem;
     box-shadow: var(--shadow);
@@ -1149,6 +1150,12 @@ section {
 
 .value-card:hover {
     transform: translateY(-5px);
+}
+
+.value-card h3,
+.value-card h4,
+.value-card p {
+    color: var(--text-primary);
 }
 
 .value-icon {
@@ -1191,7 +1198,7 @@ section {
     position: absolute;
     width: 20px;
     height: 20px;
-    right: -10px;
+    right: -15px;
     background-color: var(--primary-color);
     border: 4px solid white;
     top: 15px;
@@ -1208,12 +1215,13 @@ section {
 }
 
 .timeline-item.right::after {
-    left: -10px;
+    left: -15px;
 }
 
 .timeline-content {
     padding: 20px 30px;
-    background-color: white;
+    background-color: var(--bg-secondary);
+    border: 1px solid var(--border);
     position: relative;
     border-radius: 1rem;
     box-shadow: var(--shadow);
@@ -1230,8 +1238,19 @@ section {
     margin-bottom: 1rem;
 }
 
+.timeline-card h3 {
+    color: var(--text-primary);
+    margin-bottom: 1rem;
+}
+
 .timeline-card h4 {
     color: var(--text-secondary);
+    margin-bottom: 1rem;
+}
+
+.timeline-card p {
+    color: var(--text-secondary);
+    line-height: 1.6;
     margin-bottom: 1rem;
 }
 
@@ -1273,7 +1292,8 @@ section {
 }
 
 .education-card {
-    background: white;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border);
     border-radius: 1rem;
     padding: 2rem;
     box-shadow: var(--shadow);
@@ -1282,6 +1302,12 @@ section {
 
 .education-card:hover {
     transform: translateY(-5px);
+}
+
+.education-card h3,
+.education-card h4,
+.education-card p {
+    color: var(--text-primary);
 }
 
 .education-header {
@@ -1323,7 +1349,8 @@ section {
 }
 
 .certification-card {
-    background: white;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border);
     padding: 2rem;
     border-radius: 1rem;
     box-shadow: var(--shadow);
@@ -1333,6 +1360,12 @@ section {
 
 .certification-card:hover {
     transform: translateY(-5px);
+}
+
+.certification-card h3,
+.certification-card h4,
+.certification-card p {
+    color: var(--text-primary);
 }
 
 .cert-icon {
@@ -1705,7 +1738,7 @@ section {
     }
     
     .timeline-item::after {
-        left: 21px;
+        left: 16px;
     }
     
     .timeline-item.right {

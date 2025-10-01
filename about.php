@@ -20,6 +20,9 @@ $skills = getSkills($pdo);
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 </head>
 <body>
+    <!-- Code rain background -->
+    <div class="code-rain" id="codeRain"></div>
+
     <!-- Bouton retour accueil -->
     
     <!-- Terminal Navigation -->
@@ -33,12 +36,12 @@ $skills = getSkills($pdo);
             <div class="terminal-title">Navigation</div>
         </div>
         <div class="terminal-body">
-            <a href="index.php" class="nav-command" data-tooltip="Retour à la page d'accueil">Accueil</a>
-            <a href="about.php" class="nav-command active" data-tooltip="Page actuelle">À propos</a>
-            <a href="portfolio.php" class="nav-command" data-tooltip="Voir mes réalisations">Mes projets</a>
-            <a href="experiences.php" class="nav-command" data-tooltip="Mon expérience professionnelle">Expériences</a>
-            <a href="formations.php" class="nav-command" data-tooltip="Mon parcours de formation">Formations</a>
-            <a href="contact.php" class="nav-command" data-tooltip="Me contacter">Contact</a>
+            <a href="/" class="nav-command" data-tooltip="Retour à la page d'accueil">Accueil</a>
+            <a href="/about" class="nav-command active" data-tooltip="Page actuelle">À propos</a>
+            <a href="/portfolio" class="nav-command" data-tooltip="Voir mes réalisations">Mes projets</a>
+            <a href="/experiences" class="nav-command" data-tooltip="Mon expérience professionnelle">Expériences</a>
+            <a href="/formations" class="nav-command" data-tooltip="Mon parcours de formation">Formations</a>
+            <a href="/contact" class="nav-command" data-tooltip="Me contacter">Contact</a>
         </div>
     </div>
 

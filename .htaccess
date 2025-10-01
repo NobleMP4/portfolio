@@ -1,0 +1,55 @@
+RewriteEngine On
+
+# Enlever l'extension .php des URLs
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^([^\.]+)$ $1.php [NC,L]
+
+# Rediriger les URLs avec .php vers les URLs sans extension
+RewriteCond %{THE_REQUEST} /([^.]+)\.php [NC]
+RewriteRule ^ /%1? [NC,L,R=301]
+
+# Gérer la page d'accueil
+RewriteRule ^$ index.php [L]
+
+# Sécurité : empêcher l'accès direct aux fichiers sensibles
+<Files "config/database.php">
+    Order Allow,Deny
+    Deny from all
+</Files>
+
+<Files "includes/functions.php">
+    Order Allow,Deny
+    Deny from all
+</Files>
+
+# Empêcher l'accès aux fichiers de base de données
+<FilesMatch "\.(sql|db)$">
+    Order Allow,Deny
+    Deny from all
+</FilesMatch>
+
+# Compression GZIP pour améliorer les performances
+<IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE text/plain
+    AddOutputFilterByType DEFLATE text/html
+    AddOutputFilterByType DEFLATE text/xml
+    AddOutputFilterByType DEFLATE text/css
+    AddOutputFilterByType DEFLATE application/xml
+    AddOutputFilterByType DEFLATE application/xhtml+xml
+    AddOutputFilterByType DEFLATE application/rss+xml
+    AddOutputFilterByType DEFLATE application/javascript
+    AddOutputFilterByType DEFLATE application/x-javascript
+</IfModule>
+
+# Cache des fichiers statiques
+<IfModule mod_expires.c>
+    ExpiresActive on
+    ExpiresByType text/css "access plus 1 month"
+    ExpiresByType application/javascript "access plus 1 month"
+    ExpiresByType image/png "access plus 1 month"
+    ExpiresByType image/jpg "access plus 1 month"
+    ExpiresByType image/jpeg "access plus 1 month"
+    ExpiresByType image/gif "access plus 1 month"
+    ExpiresByType image/svg+xml "access plus 1 month"
+</IfModule>

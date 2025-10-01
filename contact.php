@@ -95,6 +95,8 @@ $csrf_token = generate_csrf_token();
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 </head>
 <body>
+    <!-- Code rain background -->
+    <div class="code-rain" id="codeRain"></div>
     
     <!-- Terminal Navigation -->
     <div class="terminal-nav">
@@ -107,12 +109,12 @@ $csrf_token = generate_csrf_token();
             <div class="terminal-title">Navigation</div>
         </div>
         <div class="terminal-body">
-            <a href="index.php" class="nav-command" data-tooltip="Retour à la page d'accueil">Accueil</a>
-            <a href="about.php" class="nav-command" data-tooltip="Découvrir mon parcours">À propos</a>
-            <a href="portfolio.php" class="nav-command" data-tooltip="Voir mes réalisations">Mes projets</a>
-            <a href="experiences.php" class="nav-command" data-tooltip="Mon expérience professionnelle">Expériences</a>
-            <a href="formations.php" class="nav-command" data-tooltip="Mon parcours de formation">Formations</a>
-            <a href="contact.php" class="nav-command active" data-tooltip="Page actuelle">Contact</a>
+            <a href="/" class="nav-command" data-tooltip="Retour à la page d'accueil">Accueil</a>
+            <a href="/about" class="nav-command" data-tooltip="Découvrir mon parcours">À propos</a>
+            <a href="/portfolio" class="nav-command" data-tooltip="Voir mes réalisations">Mes projets</a>
+            <a href="/experiences" class="nav-command" data-tooltip="Mon expérience professionnelle">Expériences</a>
+            <a href="/formations" class="nav-command" data-tooltip="Mon parcours de formation">Formations</a>
+            <a href="/contact" class="nav-command active" data-tooltip="Page actuelle">Contact</a>
         </div>
     </div>
 
@@ -166,16 +168,6 @@ $csrf_token = generate_csrf_token();
                             <div>
                                 <div style="font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 0.25rem;">Localisation</div>
                                 <div style="color: var(--text-primary); font-family: 'JetBrains Mono', monospace; font-size: 0.9rem;">Chartres, France</div>
-                            </div>
-                        </div>
-                        
-                        <div style="display: flex; align-items: center; gap: 1rem; padding: 1rem; background: var(--bg-primary); border: 1px solid var(--border); border-radius: 8px;">
-                            <div style="width: 40px; height: 40px; background: var(--warning); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--bg-primary);">
-                                <i class="fas fa-clock"></i>
-                            </div>
-                            <div>
-                                <div style="font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 0.25rem;">Disponibilité</div>
-                                <div style="color: var(--text-primary); font-family: 'JetBrains Mono', monospace; font-size: 0.9rem;">Lun - Ven : 9h - 18h</div>
                             </div>
                         </div>
                     </div>
